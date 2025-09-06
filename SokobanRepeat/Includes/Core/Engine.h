@@ -4,6 +4,7 @@
 #include "Input.h"
 #include <Windows.h>
 
+
 struct EngineSettings
 {
 	int width = 0;
