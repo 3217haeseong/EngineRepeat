@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Level/Level.h"
-#include "Interface/Interface.h"
+#include "Interface/ICanPlayerMove.h"
 
 class SokobanLevel : public Level, public ICanPlayerMove
 {

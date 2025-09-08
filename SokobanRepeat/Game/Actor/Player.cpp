@@ -4,7 +4,7 @@
 
 #include "Input.h"
 #include "Level/Level.h"
-#include "Interface/Interface.h"
+#include "Interface/ICanPlayerMove.h"
 
 #include <iostream>
 
