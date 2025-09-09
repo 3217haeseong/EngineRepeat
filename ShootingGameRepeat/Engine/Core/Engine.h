@@ -19,7 +19,18 @@ struct ImageBuffer
 	ImageBuffer(int bufferCount)
 	{
 		charInfoArray = new CHAR_INFO[bufferCount];
+		memset(charInfoArray, 0, sizeof(int) * bufferCount);
 	}
+
+	~ImageBuffer()
+	{
+		SafeDeleteArray(charInfoArray);
+		SafeDeleteArray(sortingOrderArray);
+	}
+
+	CHAR_INFO* charInfoArray = nullptr;
+
+	int* sortingOrderArray = nullptr;
 
 };
 
@@ -78,6 +89,11 @@ protected:
 	bool isQuit = false;
 	Level* mainLevel = nullptr;
 	Level* nextLevel = nullptr;
+	Input input;
+	EngineSettings settings;
+
+	ImageBuffer* imageBuffer = nullptr;
+
 	ScreenBuffer* renderTargets[2] = {};
 	int currentRenderTargetIndex = 0;
 
