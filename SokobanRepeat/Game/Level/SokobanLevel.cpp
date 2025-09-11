@@ -13,11 +13,6 @@ SokobanLevel::SokobanLevel()
     ReadMapFile("Stage1.txt");
 }
 
-bool SokobanLevel::CanPlayerMove(const Vector2& playerPosition, const Vector2& newPosition)
-{
-    return false;
-}
-
 void SokobanLevel::Render()
 {
     super::Render();
@@ -79,7 +74,7 @@ void SokobanLevel::ReadMapFile(const char* filename)
          case '1':
              AddActor(new Wall(position));
              break;
-         case '2':
+         case '.':
              AddActor(new Ground(position));
              break;
          case 'p':
@@ -219,5 +214,7 @@ bool SokobanLevel::CanPlayerMove(
 
             return true;
         }
-    }   
+    }
+
+    return false;
 }

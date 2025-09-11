@@ -6,7 +6,6 @@
 #include "Utils/Utils.h"
 #include "Input.h"
 #include "Level/Level.h"
-#include "Actor/Actor.h"
 
 Engine* Engine::instance = nullptr;
 
@@ -55,56 +54,36 @@ void Engine::Run()
 	QueryPerformanceCounter(&currentTime);
 	previousTime = currentTime;
 
-	// 하드웨어 시계의 정밀도(주파수) 가져오기.
-	// 나중에 초로 변환하기 위해.
 	LARGE_INTEGER frequency;
 	QueryPerformanceFrequency(&frequency);
 
-	// 타겟 프레임.
 	float targetFrameRate
 		= settings.framerate == 0.0f ? 60.0f : settings.framerate;
 
-	// 타겟 한 프레임 시간.
 	float oneFrameTime = 1.0f / targetFrameRate;
 
-	// GameLoop.
 	while (true)
 	{
-		// 엔진 종료 여부 확인.
 		if (isQuit)
 		{
-			// 루프 종료.
 			break;
 		}
 
-		// 프레임 시간 계산.
-		// (현재 시간 - 이전 시간) / 주파수 = 초단위.
 		QueryPerformanceCounter(&currentTime);
 
-		// 프레임 시간.
 		float deltaTime =
 			(currentTime.QuadPart - previousTime.QuadPart)
 			/ (float)frequency.QuadPart;
 
-		// 입력은 최대한 빨리.
 		input.ProcessInput();
 
-		// 고정 프레임.
 		if (deltaTime >= oneFrameTime)
 		{
 			BeginPlay();
 			Tick(deltaTime);
 			Render();
 
-			// 제목에 FPS 출력.
-			//char title[50] = { };
-			//sprintf_s(title, 50, "FPS: %f", (1.0f / deltaTime));
-			//SetConsoleTitleA(title);
-
-			// 시간 업데이트.
 			previousTime = currentTime;
-
-			// 현재 프레임의 입력을 기록.
 			input.SavePreviousKeyStates();
 		}
 	}
@@ -123,6 +102,8 @@ void Engine::AddLevel(Level* newLevel)
 	{
 		delete mainLevel;
 	}
+
+	mainLevel = newLevel;
 }
 
 void Engine::CleanUp()

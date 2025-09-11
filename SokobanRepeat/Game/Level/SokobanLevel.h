@@ -22,8 +22,6 @@ private:
 
 	bool CheckGameClear();
 
-	bool isGameClear = false;
-
 private:
 	int targetScore = 0;
 	bool isGameClear = false;

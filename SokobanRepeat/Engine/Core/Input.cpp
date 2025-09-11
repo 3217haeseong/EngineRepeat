@@ -44,3 +44,8 @@ void Input::SavePreviousKeyStates()
 			= keyStates[ix].isKeyDown;
 	}
 }
+
+Input& Input::Get()
+{
+	return *instance;
+}

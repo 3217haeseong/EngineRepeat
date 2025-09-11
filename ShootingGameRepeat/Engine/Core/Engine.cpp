@@ -3,6 +3,7 @@
 #include <Windows.h>
 
 #include "Utils/Utils.h"
+#include "Input.h"
 
 Engine* Engine::instance = nullptr;
 
@@ -57,6 +58,41 @@ void Engine::Run()
 
     LARGE_INTEGER frequency;
     QueryPerformanceFrequency(&frequency);
+
+    float targetFrameRate = settings.framerate == 0.0f ? 60.0f : settings.framerate;
+
+    float oneFrameTime = 1.0f / targetFrameRate;
+
+    while (true)
+    {
+        if (isQuit)
+        {
+            break;
+        }
+
+        QueryPerformanceCounter(&currentTime);
+
+        float deltaTime = (currentTime.QuadPart - previousTime.QuadPart) / (float)frequency.QuadPart;
+
+        input.ProcessInput();
+
+        if (deltaTime >= oneFrameTime)
+        {
+            BeginPlay();
+            input.DispatchCallbacks();
+            Tick(deltaTime);
+            Render();
+
+            previousTime = currentTime;
+
+            input.SavePreviousKeyStates();
+
+            if (mainLevel)
+            {
+                mainLevel->P
+            }
+        }
+    }
 }
 
 void Engine::WriteToBuffer(const Vector2& position, const char* image, Color color, int sortingOrder)
@@ -87,6 +123,7 @@ Engine& Engine::Get()
 {
     // TODO: 여기에 return 문을 삽입합니다.
 }
+
 
 int Engine::Width() const
 {

@@ -44,10 +44,12 @@ void Actor::SetPosition(const Vector2& newPosition)
 	COORD coord;
 	coord.X = (short)position.x;
 	coord.Y = (short)position.y;
-
+	
 	Utils::SetConsolePosition(coord);
 
 	std::cout << ' ';
+
+	position = newPosition;
 }
 
 Vector2 Actor::Position() const

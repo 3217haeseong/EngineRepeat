@@ -80,7 +80,7 @@ void Level::SortActorsBySortingOrder()
 	{
 		for (int jx = 0; jx < (int)actors.size() - 1; ++jx)
 		{
-			if (actors[jx]->sortingOrder > actors[ix + 1]->sortingOrder)
+			if (actors[jx]->sortingOrder > actors[jx + 1]->sortingOrder)
 			{
 				std::swap(actors[jx], actors[jx + 1]);
 			}
