@@ -7,13 +7,24 @@ class Engine_API RTTI
 public:
 	virtual const size_t& TypeIdInstance() const = 0;
 
-	virtual bool Is(const size_t Id) const
+	virtual bool Is(const size_t id) const
 	{
 		return false;
 	}
 
 	template<typename T>
 	T* As()
+	{
+		if (Is(T::TypeIdClass()))
+		{
+			return (T*)this;
+		}
+
+		return nullptr;
+	}
+
+	template<typename T>
+	const T* As() const
 	{
 		if (Is(T::TypeIdClass()))
 		{
@@ -44,4 +55,4 @@ public:																							\
 		{																						\
 			return ParentType::Is(id);															\
 		}																						\
-	}																							\
+	}																							

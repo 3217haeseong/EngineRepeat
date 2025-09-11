@@ -4,6 +4,7 @@
 
 #include "Utils/Utils.h"
 #include "Input.h"
+#include "Actor.h"
 
 Engine* Engine::instance = nullptr;
 
@@ -129,6 +130,8 @@ int Engine::Width() const
 {
     return 0;
 }
+
+
 
 int Engine::Height() const
 {
