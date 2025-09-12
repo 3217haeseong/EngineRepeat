@@ -29,7 +29,7 @@ private:
 protected:
 	std::vector<Actor*> actors;
 
-	std::vector<Actor*> addRequstedActors;
+	std::vector<Actor*> addRequestedActors;
 
 	std::vector<Actor*> destroyRequestedActors;
 };
